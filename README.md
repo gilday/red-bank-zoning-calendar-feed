@@ -2,7 +2,7 @@
 
 An iCalendar feed of Red Bank, NJ Zoning Board of Adjustment and Planning Board meetings.
 
-The borough files these meetings under its "Main Calendar" category (`catID=14`) alongside every other board, and the "Planning & Zoning" category (`catID=33`) is empty. A Cloudflare Worker fetches the Main Calendar feed, keeps the events whose summary matches `zoning` or `planning board` (case-insensitive), and serves the result as `text/calendar`. Subscribe to the Worker URL in any calendar app.
+The borough lists these meetings in its "Main Calendar" alongside every other board, and its "Planning & Zoning" calendar is empty. A Cloudflare Worker fetches the Main Calendar feed, keeps the events whose title contains `zoning` or `planning board` (case-insensitive), and serves the result as `text/calendar`. Subscribe to the Worker URL in any calendar app.
 
 ## Usage
 
@@ -19,8 +19,8 @@ After `just deploy`, Wrangler prints the `*.workers.dev` URL. Add it as a calend
 
 ## Design
 
-- `src/filter.js` holds the pure filtering function and the upstream URL.
-- `src/worker.js` is the Worker entry point; it fetches, filters, and responds.
-- Responses are cached for an hour, so the borough site sees at most one request per hour per Cloudflare location.
-- Matching is by event title. A board that renames its meetings needs a change to `DEFAULT_PATTERN`.
-- If the borough moves these meetings into the Planning & Zoning category, subscribe to `https://redbanknj.org/common/modules/iCalendar/iCalendar.aspx?catID=33&feed=calendar` directly and retire this Worker.
+- `src/filter.js` holds the filtering function and the upstream URL.
+- `src/worker.js` is the Worker entry point. It fetches the feed, filters it, and responds.
+- The Worker caches responses for an hour, so the borough site gets at most one request per hour per Cloudflare location.
+- Matching uses the event title. If a board renames its meetings, change `DEFAULT_PATTERN`.
+- If the borough starts listing these meetings in its Planning & Zoning calendar, subscribe to [that feed](https://redbanknj.org/common/modules/iCalendar/iCalendar.aspx?catID=33&feed=calendar) directly and retire this Worker.
