@@ -1,3 +1,3 @@
-name = "redbank-zoning-calendar-feed"
+name = "red-bank-zoning-calendar-feed"
 main = "src/worker.js"
 compatibility_date = "2026-10-01"
