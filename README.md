@@ -2,7 +2,19 @@
 
 An iCalendar feed of Red Bank, NJ Zoning Board of Adjustment and Planning Board meetings.
 
-The borough lists these meetings in its "Main Calendar" alongside every other board, and its "Planning & Zoning" calendar is empty. A Cloudflare Worker fetches the Main Calendar feed, keeps the events whose title contains `zoning` or `planning board` (case-insensitive), and serves the result as `text/calendar`. Subscribe to the Worker URL in any calendar app.
+The borough lists these meetings in its "Main Calendar" alongside every other board, and its "Planning & Zoning" calendar is empty. A Cloudflare Worker fetches the Main Calendar feed, keeps the events whose title contains `zoning` or `planning board` (case-insensitive), and serves the result as `text/calendar`.
+
+## Subscribe
+
+[![Subscribe in Google Calendar](https://img.shields.io/badge/Subscribe-Google%20Calendar-blue?style=for-the-badge&logo=googlecalendar&logoColor=white)](https://calendar.google.com/calendar/r?cid=webcal://redbank-zoning-calendar-feed.johnathan-gilday.workers.dev)
+
+For other calendar apps, subscribe to this URL:
+
+```
+https://redbank-zoning-calendar-feed.johnathan-gilday.workers.dev
+```
+
+In Apple Calendar, choose File → New Calendar Subscription and paste the URL. In Outlook, choose Add calendar → Subscribe from web.
 
 ## Usage
 
@@ -15,7 +27,7 @@ just dev      # serve the Worker locally
 just deploy   # run tests, then deploy to Cloudflare
 ```
 
-After `just deploy`, Wrangler prints the `*.workers.dev` URL. Add it as a calendar subscription (Apple Calendar: File → New Calendar Subscription).
+After `just deploy`, Wrangler prints the `*.workers.dev` URL. Subscribe to it as described above.
 
 ## Design
 
