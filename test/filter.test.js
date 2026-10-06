@@ -20,17 +20,14 @@ const calendar = (...events) =>
 
 const summaries = (ics) => [...ics.matchAll(/^SUMMARY:(.*)$/gm)].map((m) => m[1].trim());
 
-test("keeps zoning board and planning board meetings", () => {
+test("keeps zoning board meetings and drops planning board meetings", () => {
   const out = filterIcs(
     calendar(
       event(1, "Zoning Board of Adjustment Meeting"),
       event(2, "Planning Board Meeting"),
     ),
   );
-  assert.deepEqual(summaries(out), [
-    "Zoning Board of Adjustment Meeting",
-    "Planning Board Meeting",
-  ]);
+  assert.deepEqual(summaries(out), ["Zoning Board of Adjustment Meeting"]);
 });
 
 test("drops other boards and holidays", () => {
@@ -58,8 +55,8 @@ test("keeps the calendar wrapper and timezone definition", () => {
 });
 
 test("names the calendar", () => {
-  const out = filterIcs(calendar(event(1, "Planning Board Meeting")));
-  assert.match(out, /^X-WR-CALNAME:Red Bank Zoning & Planning$/m);
+  const out = filterIcs(calendar(event(1, "Zoning Board of Adjustment Meeting")));
+  assert.match(out, /^X-WR-CALNAME:Red Bank Zoning Board$/m);
 });
 
 test("unfolds a summary wrapped across lines before matching", () => {

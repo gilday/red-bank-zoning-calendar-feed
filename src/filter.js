@@ -1,9 +1,9 @@
 export const UPSTREAM_URL =
   "https://redbanknj.org/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar";
 
-export const DEFAULT_PATTERN = /zoning|planning board/i;
+export const DEFAULT_PATTERN = /zoning/i;
 
-const CALENDAR_NAME = "Red Bank Zoning & Planning";
+const CALENDAR_NAME = "Red Bank Zoning Board";
 
 export function filterIcs(ics, pattern = DEFAULT_PATTERN) {
   const unfolded = ics.replace(/\r?\n[ \t]/g, "");

@@ -1,6 +1,6 @@
 # Red Bank Zoning Calendar Feed
 
-A Cloudflare Worker that filters the Red Bank borough Main Calendar iCalendar feed down to Zoning Board and Planning Board meetings.
+A Cloudflare Worker that filters the Red Bank borough Main Calendar iCalendar feed down to Zoning Board meetings.
 
 ## Layout
 
