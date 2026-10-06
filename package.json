@@ -1,0 +1,8 @@
+{
+  "name": "redbank-zoning-calendar-feed",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  }
+}
