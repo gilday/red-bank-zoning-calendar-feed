@@ -6,6 +6,7 @@ The borough lists these meetings in its "Main Calendar" alongside every other bo
 
 ## Subscribe
 
+[![Subscribe in Apple Calendar or Outlook](https://img.shields.io/badge/Subscribe-Apple%20Calendar%20%7C%20Outlook-blue?style=for-the-badge&logo=apple&logoColor=white)](https://red-bank-zoning-calendar-feed.johnathan-gilday.workers.dev/subscribe)
 [![Subscribe in Google Calendar](https://img.shields.io/badge/Subscribe-Google%20Calendar-blue?style=for-the-badge&logo=googlecalendar&logoColor=white)](https://calendar.google.com/calendar/r?cid=webcal://red-bank-zoning-calendar-feed.johnathan-gilday.workers.dev)
 
 For other calendar apps, subscribe to this URL:
@@ -13,8 +14,6 @@ For other calendar apps, subscribe to this URL:
 ```
 https://red-bank-zoning-calendar-feed.johnathan-gilday.workers.dev
 ```
-
-In Apple Calendar, choose File → New Calendar Subscription and paste the URL. In Outlook, choose Add calendar → Subscribe from web.
 
 ## Usage
 

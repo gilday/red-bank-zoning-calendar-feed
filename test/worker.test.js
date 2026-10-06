@@ -22,7 +22,7 @@ test("serves the filtered feed as text/calendar", async () => {
   ].join("\r\n");
   globalThis.fetch = async () => new Response(upstream);
 
-  const res = await worker.fetch();
+  const res = await worker.fetch(new Request("https://feed.example/"));
 
   assert.equal(res.status, 200);
   assert.match(res.headers.get("Content-Type"), /^text\/calendar/);
@@ -33,6 +33,15 @@ test("serves the filtered feed as text/calendar", async () => {
 
 test("returns 502 when the borough site fails", async () => {
   globalThis.fetch = async () => new Response("nope", { status: 500 });
-  const res = await worker.fetch();
+  const res = await worker.fetch(new Request("https://feed.example/"));
   assert.equal(res.status, 502);
+});
+
+test("redirects /subscribe to a webcal URL for the same host", async () => {
+  globalThis.fetch = async () => {
+    throw new Error("must not call upstream");
+  };
+  const res = await worker.fetch(new Request("https://feed.example/subscribe"));
+  assert.equal(res.status, 302);
+  assert.equal(res.headers.get("Location"), "webcal://feed.example/");
 });

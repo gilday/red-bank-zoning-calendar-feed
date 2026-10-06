@@ -1,7 +1,14 @@
 import { UPSTREAM_URL, filterIcs } from "./filter.js";
 
 export default {
-  async fetch() {
+  async fetch(request) {
+    const url = new URL(request.url);
+    if (url.pathname === "/subscribe") {
+      return new Response(null, {
+        status: 302,
+        headers: { Location: `webcal://${url.host}/` },
+      });
+    }
     const upstream = await fetch(UPSTREAM_URL, {
       headers: { "User-Agent": "Mozilla/5.0" },
       cf: { cacheTtl: 3600, cacheEverything: true },
