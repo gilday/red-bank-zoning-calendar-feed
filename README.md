@@ -1,8 +1,8 @@
 # Red Bank Zoning Calendar Feed
 
-An iCalendar feed of Red Bank, NJ Zoning Board of Adjustment and Planning Board meetings.
+An iCalendar feed of Red Bank, NJ Zoning Board of Adjustment meetings.
 
-The borough lists these meetings in its "Main Calendar" alongside every other board, and its "Planning & Zoning" calendar is empty. A Cloudflare Worker fetches the Main Calendar feed, keeps the events whose title contains `zoning` or `planning board` (case-insensitive), and serves the result as `text/calendar`.
+The borough lists these meetings in its "Main Calendar" alongside every other board, and its "Planning & Zoning" calendar is empty. A Cloudflare Worker fetches the Main Calendar feed, keeps the events whose title contains `zoning` (case-insensitive), and serves the result as `text/calendar`.
 
 ## Subscribe
 
