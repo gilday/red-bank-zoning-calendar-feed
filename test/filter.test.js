@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { filterIcs } from "../src/filter.js";
+import { DEFAULT_LOCATION, filterIcs } from "../src/filter.js";
 
 const event = (uid, summary) =>
   ["BEGIN:VEVENT", `UID:${uid}`, `SUMMARY:${summary}`, "END:VEVENT"].join("\r\n");
@@ -77,4 +77,34 @@ test("accepts a custom pattern", () => {
     /rent leveling/i,
   );
   assert.deepEqual(summaries(out), ["Rent Leveling Board"]);
+});
+
+const locations = (ics) => [...ics.matchAll(/^LOCATION:(.*)$/gm)].map((m) => m[1].trim());
+
+test("fills in the default location when an event has none", () => {
+  const out = filterIcs(calendar(event(1, "Zoning Board of Adjustment Meeting")));
+  assert.deepEqual(locations(out), [DEFAULT_LOCATION]);
+});
+
+test("fills in the default location when the upstream location is empty", () => {
+  const blank = [
+    "BEGIN:VEVENT",
+    "UID:1",
+    "SUMMARY:Zoning Board Meeting",
+    "LOCATION:",
+    "END:VEVENT",
+  ].join("\r\n");
+  assert.deepEqual(locations(filterIcs(calendar(blank))), [DEFAULT_LOCATION]);
+});
+
+test("prefers the upstream location, including when folded", () => {
+  const folded = [
+    "BEGIN:VEVENT",
+    "UID:1",
+    "SUMMARY:Zoning Board Meeting",
+    "LOCATION:Council Cham",
+    " bers",
+    "END:VEVENT",
+  ].join("\r\n");
+  assert.deepEqual(locations(filterIcs(calendar(folded))), ["Council Chambers"]);
 });
