@@ -1,0 +1,11 @@
+{
+  "sandbox": {
+    "network": {
+      "allowedDomains": [
+        "api.cloudflare.com",
+        "sparrow.cloudflare.com",
+        "red-bank-zoning-calendar-feed.johnathan-gilday.workers.dev"
+      ]
+    }
+  }
+}
